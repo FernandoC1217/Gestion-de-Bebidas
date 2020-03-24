@@ -1,0 +1,10 @@
+package ProyectoIngenieria;
+
+public class main {
+
+	public static void main(String[] args) {
+		Usuario prueba= new Usuario("", "", "");
+     prueba.getUserpassword();
+	}
+
+}
