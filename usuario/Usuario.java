@@ -1,0 +1,93 @@
+package usuario;
+
+import java.util.Scanner;
+
+public class Usuario {
+
+	private String tipousuario;
+	private String userpassword;
+	private String nameuser;
+
+	public Usuario(String tipousuario, String userpassword, String nameuser) {
+
+		this.tipousuario = tipousuario;
+		this.userpassword = userpassword;
+		this.nameuser = nameuser;
+	}
+
+	public String getTipousuario(String tipousuario) {
+		Scanner teclado = new Scanner(System.in);
+		System.out.println("Bienvenido a la plataforma de gestionamiento de la empresa:"
+				+ "\nMencione quien esta tratando de acceder (Manager o Colaborador) ");
+		tipousuario = teclado.nextLine().toUpperCase();
+		if (tipousuario.equals("Colaborador")) {
+			//Aqui se pondra la funcion que pintara el ingreso por contraseña
+		} else if (tipousuario.contentEquals("Manager")) {
+			//Aqui se pondra la funcion de contraseña
+		} else {
+			System.out.println("Lo introdujo no pertenece a ninguna de las opciones.");
+		}
+		return tipousuario;
+	}
+
+	public void setTipousuario(String tipousuario) {
+		this.tipousuario = tipousuario;
+	}
+
+	//esta es una funcion auxiliar de la contraseña para verificar si esta correcta o no
+	public boolean getVerificar_Contrasenia(String nameuser, String userpassword) {
+		Scanner teclado = new Scanner(System.in);
+		boolean encontrado = true;
+		this.nameuser = nameuser;
+		this.userpassword = userpassword;
+		System.out.println("Porfavor, coloque el Numero de usuario y contrasenia.");
+		System.out.print("usuario: ");
+		nameuser = teclado.nextLine().toUpperCase();
+		System.out.print("contrasenia: ");
+		userpassword = teclado.nextLine().toUpperCase();
+
+		if (nameuser.contentEquals("usuario123") && userpassword.contentEquals("12345")) {
+			encontrado = true;
+			System.out.println("Ingreso con exito!");
+		} else {
+			System.out.println("Lo siento, ACCESO DENEGADO.");
+			encontrado = false;
+		}
+		return encontrado;
+		/*ERRORES ENCONTRADOS:
+		 * No daba respuesta al definir si se encontro o no : Se agregaron dialogos
+		 */
+	}
+
+	//esta funcion verifica los intentos cada vez que se accese de manera erronea
+	public void getUserpassword() {
+		Scanner teclado = new Scanner(System.in);
+		//Variables dentro de la funcion:
+		int intentos = 3;
+		boolean encontrado = getVerificar_Contrasenia(nameuser, userpassword);
+		while (!encontrado && (intentos < 4 && intentos > 0)) {
+			System.out.println("La cantidad de intentos es: " + intentos);
+			encontrado = getVerificar_Contrasenia(nameuser, userpassword);
+			intentos--;
+		}
+		/*ERRORES ENCONTRADOS:
+		 * Al principio los intentos me aparecian de manera creciente
+		 * No se estaban guardando las respuestas, asi que le incluí parametros a la funcion verificar
+		 */
+	}
+
+	public void setUserpassword(String userpassword) {
+		this.userpassword = userpassword;
+	}
+
+	public String getNameuser() {
+		return nameuser;
+	}
+
+	public void setNameuser(String nameuser) {
+		this.nameuser = nameuser;
+	}
+
+}
+
+
